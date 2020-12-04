@@ -27,8 +27,7 @@ public final class PersonFactory {
         boolean isMale = RandomUtils.createBoolean(50);
         long personalId = System.nanoTime();
         Date birthDate = RandomUtils.createDate(1950, 2010);
-        Person randomPerson = new Person(name, isMale, personalId, birthDate, aliases);
-        return randomPerson;
+        return new Person(name, isMale, personalId, birthDate, aliases);
     }
 
     /**
@@ -38,7 +37,7 @@ public final class PersonFactory {
      * @return - ArrayList of Person objects
      */ // TODO
     public List<Person> createPersonList(int listSize) {
-        return Stream.generate(() -> createRandomPerson())
+        return Stream.generate(this::createRandomPerson)
                 .limit(listSize)
                 .collect(Collectors.toList());
     }
@@ -58,6 +57,6 @@ public final class PersonFactory {
      * @return - Stream representation of collection of Person objects
      */ // TODO
     public Stream<Person> createPersonStream(int streamCount) {
-        return Stream.generate(() -> createRandomPerson()).limit(streamCount);
+        return Stream.generate(this::createRandomPerson).limit(streamCount);
     }
 }

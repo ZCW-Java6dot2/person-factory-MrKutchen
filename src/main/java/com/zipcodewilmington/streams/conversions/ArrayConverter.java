@@ -17,20 +17,19 @@ public final class ArrayConverter extends PersonConversionAgent<Person[]> {
     }
 
     public ArrayConverter(int collectionSize) {
-        this(Stream
-                .generate(new PersonFactory()::createRandomPerson)
+        this(Stream.generate(new PersonFactory()::createRandomPerson)
                 .limit(collectionSize)
                 .toArray(Person[]::new));
     }
 
     //TODO
     public List<Person> toList() {
-        return null;
+        return Arrays.asList(super.objectSequence);
     }
 
     //TODO
     public Stream<Person> toStream() {
-        return null;
+        return Arrays.stream(super.objectSequence);
     }
 
     @Override
